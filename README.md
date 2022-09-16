@@ -1,27 +1,24 @@
-# TintypeText
-This typewriter OCR application can convert JPEG typewritten text images into RTF documents, while removing typos for you!
+# e-Braille Tales
+This braille OCR application can convert JPEG braille text images into RTF documents, while removing typos for you!
 
-![Image RTF basic mode](https://github.com/LPBeaulieu/Typewriter-OCR-TintypeText/blob/main/TintypeText%20basic%20rtf%20mode%20screenshot.jpg)
-<h3 align="center">Tintype¶Text</h3>
+![Image RTF basic mode](https://github.com/LPBeaulieu/e-Braille-Tales/blob/main/e-Braille%20Tales%20Thumbnail.png)
+<h3 align="center">e-Braille Tales</h3>
 <div align="center">
   
   [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPLv3.0-brightgreen.svg)](https://github.com/LPBeaulieu/TintypeText/blob/main/LICENSE)
-  [![GitHub last commit](https://img.shields.io/github/last-commit/LPBeaulieu/TintypeText)](https://github.com/LPBeaulieu/TintypeText)
-  [![GitHub issues](https://img.shields.io/github/issues/LPBeaulieu/TintypeText)](https://github.com/LPBeaulieu/TintypeText)
+  [![GitHub last commit](https://img.shields.io/github/last-commit/LPBeaulieu/e-Braille-Tales)](https://github.com/LPBeaulieu/e-Braille-Tales)
+  [![GitHub issues](https://img.shields.io/github/issues/LPBeaulieu/e-Braille-Tales)](https://github.com/LPBeaulieu/e-Braille-Tales)
   
 </div>
 
 ---
 
-<p align="left"> <b>Tintype¶Text</b> is a tool enabling you to convert scanned typewritten pages (in JPEG image format) into rich text format (RTF) 
-  documents, complete with formatting elements such as text alignment, paragraphs, <u>underline</u>, <i>italics</i>, <b>bold</b> and <del>strikethrough</del>. </p>
-<p align="left"> A neat functionality of <b>Tintype¶Text</b> is that the typos (wrong typewritten characters overlaid with a hashtag)
-  automatically get filtered out, and do not appear in the final RTF text. This feature, when combined with erasable typewriter ink (see https://www.reddit.com/r/typewriters/comments/ujqxrh/how_to_make_erasable_typewriter_ink/) brings the typewriter well into the 21<sup>st</sup> century as a data entry tool!
+<p align="left"> <b>e-Braille Tales</b> is a tool enabling you to convert scanned braille pages (in JPEG image format and typed on a Perkins Brailler) into Portable Embosser Format (PEF) digitized braille and rich text format (RTF) documents, complete with formatting elements such as alignment, paragraphs, <u>underline</u>, <i>italics</i>, <b>bold</b> and <del>strikethrough</del>, basically allowing you to include any formatting that RTF commands or braille formatting indicators will enable you to do.</p>
+<p align="left"> A neat functionality of <b>e-Braille Tales</b> is that the typos (sequence of at least two successive full braille cells)
+  automatically get filtered out, and do not appear in the final RTF text nor in the PEF file. The PEF file can in turn be used to print out copies of your work on a braille embosser, or to read them electronically using a refreshable braille display.
   
-  - You can get my <b>deep learning models</b> for both typewriters on which I developed the code on my Google Drive (<i>2021 
-Royal Epoch</i> https://drive.google.com/drive/folders/1DUKqYf7wIkRAobC8fYPjum5gFOJqJurv?usp=sharing and <i>1968 Olivetti Underwood Lettera 33</i> https://drive.google.com/drive/folders/1sykG3zUfr8RJVbk59ClnzHjO3qgkXTmF?usp=sharing), where the datasets and other useful information to build your own datasets may be found. 
-- The code showcased in this github page is the one that was used to generate a model with <b>99.93% optical character recognition (OCR) accuracy</b> with the 2021 Royal Epoch typewriter, which is in production and commercially available (I'm not affiliated with them, no worries).
-- The generalizability of the model trained on a 2021 Royal Epoch typewriter was assessed on another unit of the same model (2019 Royal Epoch typewriter), with a text over 6,000 characters long. It gave an OCR accuracy of 99.22%, thus demonstrating that deep learning models trained with <b>Tintype¶Text</b> could be used with other typewriters of the same model (albeit with somewhat lower accuracy).
+  - You can get my <b>deep learning model</b> for the Perkins Brailler on my Google Drive (https://drive.google.com/drive/folders/1DUKqYf7wIkRAobC8fYPjum5gFOJqJurv?usp=sharing), where the dataset and other useful information to build your own dataset (if needed) may be found. 
+- The code showcased in this github page is the one that was used to generate a model with <b>99.97% optical character recognition (OCR) accuracy</b> with the Perkins Brailler (I'm not affiliated with them, no worries).
   
     <br> 
 </p>
@@ -35,38 +32,26 @@ Royal Epoch</i> https://drive.google.com/drive/folders/1DUKqYf7wIkRAobC8fYPjum5g
 
 ## ⛓️ Dependencies / Limitations <a name = "limitations"></a>
 - This Python project relies on the Fastai deep learning library (https://docs.fast.ai/) to generate a convoluted neural network 
-  deep learning model, which allows for typewriter optical character recognition (OCR). It also needs OpenCV to perform image segmentation 
-  (to crop the individual characters in the typewritten page images).
+  deep learning model, which allows for braille optical character recognition (OCR). It also needs OpenCV to perform image segmentation 
+  (to crop the individual characters in the braille page images).
   
-- A deep learning model trained on a specific typewriter is unlikely to generalize well to other typewriter brands, which may use different 
-  typesets and character spacing. It is therefore preferable to train a model on your own typewriter.
-- For best results, the typewritten text should be <b>double spaced</b> to avoid segmentation mistakes or omissions and the 8 1/2" x 11" typewritten pages should be <b>scanned at a resolution of 600 dpi</b>, as this resolution was used when writing the code.
-- Every typewritten line should have <b>at least five adjoining letters</b> in order to be properly detected. Should a line only contain a word with 
-  four or fewer letters, you could make up for the missing letters by using any character (other than "#") overlaid with a hashtag, which will 
-  be interpreted by the code as an empty string, and will not impact the meaningful text on the line in the final rich text format (RTF) document.
-- The <b>hashtag character is reserved</b> for designating typos, as a hyphen or equal sign overlaid with a hashtag are very similar to a hashtag 
-  character by itself and would lead to OCR accuracy loss if it were used as a regular character.
-- The <b>"@" symbol is reserved</b> to designate characters that are to be deleted (see description below) and should not be used on your typewriter, if it has such a type slug. 
-- It should be noted that one of the typewriters with which the code was developed  (1968 Olivetti Underwood Lettera 33) doesn’t have specific type slugs for numbers zero (0) and one (1). After the OCR step, the Python code will interpret whether the surrounding characters are also digits 
-  and assign the values to instances of uppercase “O” and lowercase “L” accordingly. It also converts the uppercase “O” into zero if it is 
-  in one of the closing RTF formatting commands (e.g. \iO is changed to \i0). Even if your typewriter has type slugs for zero and one, make sure that they are very distinct in appearance from the uppercase “O” and lowercase “L” in order to ensure good OCR accuracy. Otherwise, just use the letters instead. Also, the <b>equal sign</b> on the typewriter is interpreted as a <b>backslash</b> if it is followed by a letter or an RTF escape (\\' (ASCII rtf character escape), \\- (hyphenation point) or \\_ (nonbreaking hyphen)), which is useful in RTF commands and escape codes. For an in-depth explanation of all the most common RTF commands and escapes, please consult: https://www.oreilly.com/library/view/rtf-pocket-guide/9781449302047/ch01.html. 
-- To keep things as simple as possible in the (default) <b>basic RTF mode</b> of the "get_predictions.py" code, the use of curly brackets "{}" is disabled and "=par" is changed for "\par\pard" after OCR ("=" is used as there are no backslashes on typewriters). This means that the paragraph-formatting attributes (such as centered alignment, "<i>qc</i>" in the first line of the image above) are returned to their default values automatically when a new paragraph is started by typing "=par" on the typewriter.
-- In the <b>advanced RTF mode</b>, the use of two successive parentheses "(( and ))" is translated to curly braces "{ and }", respectively, in the "get_predictions.py" Python code. Also, "=par" is changed to "\par" in the advanced RTF mode (and not to "\par\pard" as in the basic RTF mode). This allows more flexibility and the use of the curly brackets already limits the scope of the RTF commands, so there is no need to have a "\pard" added automatically. The image below illustrates how to use the parentheses in RTF commands in the advanced RTF mode. 
+- When typing text on the Perkins Brailler, unless a space is included at the end of a line or at the beginning of the next line, the last word on the     line will be merged with the first characters on the next one, up to the next space. As such, the <b>"line continuation without space" braille symbol     ("⠐") is not required and should be avoided</b>, as it could be confused with other braille characters, such as initial-letter contractions. However,     line   continuations with a space ("⠐⠐") can be used without problem in this application.
 
-![Image RTF advanced mode](https://github.com/LPBeaulieu/Typewriter-OCR-TintypeText/blob/main/TintypeText%20advanced%20rtf%20mode%20image.jpg)<hr>
+- In this application a space needs to be included after any RTF command (even though the RTF specifications state that it is an optional space). The       reason for this is that when the code is transposing the braille into printed English, it often needs to determine if the following braille characters   stand alone. A braille character that stands alone means that it is flanked by characters such as empty braille cells ("⠀") or dashes, but not by a       braille character mapping to a letter or number, such that can be found at the end of every RTF command. In other words, <b>you must include a space     after any RTF commands</b>. Here is an example: "This requirement \strike strikes \strike0 me as being important!", which in braille would be written     as follows: "⠠⠹⠀⠗⠑⠟⠥⠊⠗⠑⠰⠞⠀⠸⠡⠎⠞⠗⠊⠅⠑⠀⠎⠞⠗⠊⠅⠑⠎⠀⠸⠡⠎⠞⠗⠊⠅⠑⠼⠚⠀⠍⠑⠀⠵⠀⠆⠬⠀⠊⠍⠏⠕⠗⠞⠁⠝⠞⠖".
 
-- It is recommended to include a space between your text and the parentheses (single or double, see image above), to reduce segmentation issues due to staggered character rectangles. The Python code automatically removes these spaces (if present) in the final RTF document (see image above). 
+- Importantly, <b>the pages must be scanned with the left margin placed on the flatbed scanner in such a way that the shadows produced by the 
+  scanner light will face away from the left margin</b> (the shadows will face the right margin of the page, then the page is viewed in landscape mode). 
+  This is because the non-white pixels actually result from the presence of shadows, the orientation of which plays a major role in image segmentation     (determining the x and y coordinates of the individual characters) and optical character recognition (OCR). For best results, the braille document 
+  should be <b>typed on white braille paper or cardstock and scanned as grayscale images on a flatbed scanner at a 300 dpi resolution with the paper size   setting of the scanner set to letter 8 1/2" x 11" (A4)</b>. The darkness settings of the scanner might also need to be adjusted to acheive an optimal     braille shadow to noise ratio.
+  
+- <b>The left margin on the Perkins Brailler should be set at its minimal setting</b> to maximize the printable space on the page and to always provide     the same   reference point to the code for the segmentation step. <b>The pixel "x_min" at which the code starts cropping characters on every line needs   to be entered manually in the code, as you initially calibrate the code to your own brailler and scanner combination</b>. In my case, the value of the   variable "x_min" is set to 282       pixels in **line 140** of the Python code "e-braille-tales.py". After running the code on a scanned braille text image   of yours, you could then open the     JPEG image overlayed with green character rectangles (see Figure 1 below) in a photo editing software such as       GIMP, in order to locate the pixel value   along the x axis (in landscape mode) at which the segmentation shoud start in each line. 
 
-Despite these issues, the code has successfully located characters (segmentation step) on lines with at least 5 successive letters with a success 
-rate above 99.99% for the training/validation data consisting of over 25,000 characters. The only issue reported with the training/validation 
-data was an omitted period. As for the OCR accuracy, it was consistently above 99.8% regardless of the hyperparameters investigated (other than kernel size), provided
-a good-sized dataset is used for training. 
+ - Every brailled line should have braille characters that when taken together contain at least three dots per braille cell row in order to be properly      detected. Should a line only contain characters that do not have dots in one or more of the three braille cell rows, you could make up for the            missing dots by using at least two successive full braille cells ("⠿") before or after the text, which will be interpreted by the code as a typo, and    will not impact the meaningful text on the line in the final Rich Text Format (RTF) and Portable Embosser Format (PEF) files.
 
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-The following instructions will be provided in great detail, as they are intended for a broad audience and will
-allow to run a copy of <b>Tintype¶Text</b> on a local computer. Here is a link to an instructional video explaining the steps 1 through 8 described below: https://www.youtube.com/watch?v=FG9WUW6q3dI&list=PL8fAaOg_mhoEZkbQuRgs8MN-QSygAjdil&index=2.
+The following instructions will be provided in great detail, as they are intended for a broad audience and will allow to run a copy of <b>e-Braille Tales</b> on a local computer. As the steps 1 through 8 described below are the same as for my other project <b>Tintype Text</b>  (https://github.com/LPBeaulieu/Typewriter-OCR-TintypeText), a link is provided here to an instructional video explaining how to setup Tintype text: https://www.youtube.com/watch?v=FG9WUW6q3dI&list=PL8fAaOg_mhoEZkbQuRgs8MN-QSygAjdil&index=2.
 
 The paths included in the code are formatted for Unix (Linux) operating systems (OS), so the following instructions 
 are for Linux OS environments.
@@ -111,7 +96,7 @@ pip install alive-progress
 ```
 mkdir "OCR Raw Data" "Training&Validation Data" 
 ```
-<b>Step 9</b>- You're now ready to use <b>Tintype¶Text</b>! 🎉
+<b>Step 9</b>- You're now ready to use <b>e-Braille Tales</b>! 🎉
 
 ## 🎈 Usage <a name="usage"></a>
 There are four different Python code files that are to be run in sequence. You can skip ahead to file 4 ("get_predictions.py") if you will be using one of the models in the Google Drive links above. You can find instructions for every Python file in the TintypeText - Typewriter Optical Character Recognition (OCR) playlist on my YouTube channel: https://www.youtube.com/playlist?list=PL8fAaOg_mhoEZkbQuRgs8MN-QSygAjdil.<br><br>
