@@ -74,7 +74,7 @@ source env/bin/activate
 
 <b>Step 4</b>- Install <b>PyTorch</b> (Required Fastai library to convert images into a format usable for deep learning) using the following command (or the equivalent command found at https://pytorch.org/get-started/locally/ suitable to your system):
 ```
-pip3 install torch==1.10.2+cpu torchvision==0.11.3+cpu torchaudio==0.10.2+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html
+pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
 ```
 
 <b>Step 5</b>- Install the <i>CPU-only</i> version of <b>Fastai</b> (Deep Learning Python library, the CPU-only version suffices for this application, as the character images are very small in size):
@@ -99,8 +99,21 @@ mkdir "OCR Raw Data" "Training&Validation Data"
 <b>Step 9</b>- You're now ready to use <b>e-Braille Tales</b>! 🎉
 
 ## 🎈 Usage <a name="usage"></a>
-There are four different Python code files that are to be run in sequence. You can skip ahead to file 4 ("get_predictions.py") if you will be using one of the models in the Google Drive links above. You can find instructions for every Python file in the TintypeText - Typewriter Optical Character Recognition (OCR) playlist on my YouTube channel: https://www.youtube.com/playlist?list=PL8fAaOg_mhoEZkbQuRgs8MN-QSygAjdil.<br><br>
-<b>File 1: "create_rectangles.py"</b>- This Python code enables you to see the segmentation results (the green rectangles delimiting
+The "e-braille-tales.py" Python code converts JPEG braille text scans into printed English in the form of an RTF file and digitized braille as a PEF file. You can find instructions on how to use it on my YouTube channel: **LINK**.<br><br>
+
+- In order to submit a scanned braille text page to the code, you need to <b>place the JPEG image in the "OCR Raw Data" subfolder of your working           folder</b>, which you created at step 8 of the "Getting Started" section.
+
+- Then, run the "e-braille-tales.py" Python script by opening the command line from your working folder, such that you will already be in the correct       path and copy and paste the following in command line:  
+```
+python3 e-braille-tales.py
+```
+
+- The first thing that the code will do is perform segmentation (determine the x and y coordinates of every braille character). The segmentation results   are visible in the "Page image files with rectangles" folder, which is created automatically by the code. You might need to <b>adjust the value of the   variable "x_min" at line 140 of the "e-braille-tales.py" Python code</b>, in order to initially calibrate the code to your Perkins Brailler/scanner       combination. Remember to <b>always set the left margin of the Perkins Brailler to its minimum setting</b> (see explanation above in the                   "Dependencies / Limitations" section). Go ahead and open the JPEG file with segmentation results (green rectangles) in a photo editing software such as   GIMP. Take note of the pixel at which the braille character starts along the x axis (in landscape mode) and update the value at line 140 of the "e-       braille-tales.py" Python code. Please refer to Figure 1 for more details on this step.  
+
+
+
+
+This Python code enables you to see the segmentation results (the green rectangles delimiting
 the individual characters on the typewritten image) and then write a ".txt" file with the correct labels for each rectangle. The mapping
 of every rectangle to a label will allow to generate a dataset of character images with their corresponding labels. The typewriter
 page images overlaid with the character rectangles are stored in the "Page image files with rectangles" folder, which is created
@@ -116,42 +129,8 @@ When your typewritten text gets fainter, change that digit back to 3 to make the
 ![Image txt file processing](https://github.com/LPBeaulieu/TintypeText/blob/main/txt%20file%20example.jpg)<hr>
 The image above illustrates the format of the ".txt" file listing all of the character rectangle labels. In the first line, you can note that four of the characters are labeled as "@", which maps to the category "to be deleted". The three letters (C, X and I) have significant ink splattering and will not be included in the training data, as they are not representative of these characters. The fourth "@" on the first line corresponds to an artifact (some noise was above the filtering threshold and was picked up as a character). We also do not want to include it in the training data. The "lesser than" symbol highlighted in yellow on line 11 in the ".txt" file corresponds to an "empty" rectangle, which is mapped to the "space" category in the "Dataset" folder. The very last line of the typewriter scan image contains two typos (two characters overlaid with a hashtag symbol). They are represented by a "~" symbol in the ".txt" file on line 19. All the other character rectangles are represented by their own characters in the ".txt" file. 
 <br><br>
-Importantly, <b>such ".txt" files should be created, modified and saved exclusively in basic text editors</b> (such as Text Editor in Ubuntu 20.04), as more elaborate word processors would include extra formatting information that would interfere with the correct mapping of the character rectangles to their labels in the ".txt" file.
+I
 
-<b>Furthermore, the ".txt" files in the "Training&Validation Data" folder must have identical names to their corresponding JPEG images (minus the file extensions).</b> For example, the file "my_text.txt" would contain the labels corresponding to the raw scanned typewritten page JPEG image (without the character rectangles) named "my_text.jpg". The presence of hyphens in the file name is only necessary for JPEG files intended for OCR predictions (see below, file 4 "get_predictions.py"), although you could include some hyphens in every file name just as well.
-
-<br>
- <b>File 2: "create_dataset.py"</b>- This code will crop the individual characters in the same way as the "create_rectangles.py" code,
- and will then open the ".txt" file containing the labels in order to create the dataset. Each character image will be sorted in its
- label subfolder within the "Dataset" folder, which is created automatically by the code. <br><br>
- A good practice <b>when creating a dataset</b> is to make the ".txt" file and then run the "create_dataset.py" code <b>one page at a time</b> (only one JPEG image and its corresponding ".txt" file at a time in the "Training&Validation Data" folder) to validate that the labels in the ".txt" file line up with the character rectangles on the typewritten text image. Such a validation step involves opening every "Dataset" subfolder and ensuring that every image corresponds to its subfolder label (pro tip: select the icon display option in the folder in order to display the image thumbnails, which makes the validation a whole lot quicker). You will need to delete the "Dataset" folder in between every page, otherwise it will add the labels to the existing ones within the subfolders. This makes it more manageable to correct any mistakes in the writing of the ".txt" files. Of note, some of the spaces are picked up as characters and framed with rectangles. You need to label those spaces with a lesser-than sign ("<"). Here is the list of symbols present in the ".txt" files mapping to the different characters rectangles:
-  
-  - <b>"<"</b>: "blank" character rectangle, which corresponds to a space. These character images are stored in the "space" subfolder within the "Dataset" folder.
-  - <b>"~"</b>: "typo" character rectangle (any character overlaid with "#"). These character images are stored in the "empty" subfolder within the "Dataset" folder. 
-  - <b>"@"</b>: "to be deleted" character rectangle (any undesired artifact or typo that wasn't picked up while typing on the typewriter). The 
-    "to be deleted" subfolder (within the "Dataset" folder) and all its contents is automatically deleted and the characters labeled with "@" in the ".txt" file will be absent
-    from the dataset, to avoid training on this erroneous data.
-  - All the other characters in the ".txt" files are the same as those that you typed on your typewriter. The character images are stored in subfolders within the "Dataset" folder bearing the character's name (e.g. "a" character images are stored in the subfolder named "a").
- 
-  <b>Once you're done validating</b> the individual ".txt" files, you can delete the "Dataset" folder once more, add <b>all of the ".txt" files along with their corresponding JPEG images</b> to the "Training&Validation Data" folder and run the "create_dataset.py" code to get your complete dataset! 
-  
-![Image folder tree structure](https://github.com/LPBeaulieu/TintypeText/blob/main/Folder%20tree%20structure%20image.jpg)<hr>
-The image above shows the folder tree structure of your working folder (above), along with the label subfolders within the "Dataset" folder (below).
- 
-  <br><b>File 3: "train_model.py"</b>- This code will train a convoluted neural network deep learning model from the labeled character images 
-  within the "Dataset" folder. It will also provide you with the accuracy of the model in making OCR predictions, which will be displayed
-  in the command line for every epoch (run through the entire dataset). The default hypeparameters (number of epochs=3, batch size=64, 
-  learning rate=0.005, kernel size=5) were optimal and consistently gave OCR accuracies above 99.8%, provided a good-sized dataset is used (above 25,000 characters).  
-  In my experience with this project, varying the value of any hyperparameter other than the kernel size did not lead to significant variations in accuracy.
-  As this is a simple deep learning task, the accuracy relies more heavily on having good quality segmentation and character images that 
-  accurately reflect those that would be found in text. Ideally, some characters would be typed with a fresh typewriter ribbon and others with an old one,
-  to yield character images of varying boldness, once again reflecting the irregularities normally observed when using a typewriter.
-  
-  When you obtain a model with good accuracy, you should rename it and do a backup of it along with the "Dataset" folder on which it was trained.
-  If you do change the name of the model file, you also need to update its name in the line 174 of "get_predictions.py":
-  ```
-  learn = load_learner(cwd + '/your_model_name')
-  ```
   <br><b>File 4: "get_predictions.py"</b>- This code will perform OCR on JPEG images of scanned typewritten text (at a resolution of 600 dpi)
   that you will place in the folder "OCR Raw Data". 
   
