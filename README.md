@@ -13,11 +13,11 @@ This braille OCR application can convert JPEG braille text images into RTF docum
 
 ---
 
-<p align="left"> <b>e-Braille Tales</b> is a tool enabling you to convert scanned braille pages (in JPEG image format and typed on a Perkins Brailler) into Portable Embosser Format (PEF) digitized braille and rich text format (RTF) documents, complete with formatting elements such as alignment, paragraphs, <u>underline</u>, <i>italics</i>, <b>bold</b> and <del>strikethrough</del>, basically allowing you to include any formatting that RTF commands or braille formatting indicators will enable you to do.</p>
+<p align="left"> <b>e-Braille Tales</b> is a tool enabling you to convert scanned braille pages (in JPEG image format and typed on a Perkins Brailler) into Portable Embosser Format (PEF) digitized braille and rich text format (RTF) documents, complete with formatting elements such as alignment, paragraphs, <u>underline</u>, <i>italics</i>, <b>bold</b> and <del>strikethrough</del>, basically allowing you to include any formatting encoded by RTF commands or braille typeform indicators.</p>
 <p align="left"> A neat functionality of <b>e-Braille Tales</b> is that the typos (sequence of at least two successive full braille cells)
   automatically get filtered out, and do not appear in the final RTF text nor in the PEF file. The PEF file can in turn be used to print out copies of your work on a braille embosser, or to read them electronically using a refreshable braille display.
   
-  - You can get my <b>deep learning model</b> for the Perkins Brailler on my Google Drive (https://drive.google.com/drive/folders/1DUKqYf7wIkRAobC8fYPjum5gFOJqJurv?usp=sharing), where the dataset and other useful information to build your own dataset (if needed) may be found. 
+  - My <b>deep learning model</b> for the Perkins Brailler is available on my Google Drive (https://drive.google.com/drive/folders/1DUKqYf7wIkRAobC8fYPjum5gFOJqJurv?usp=sharing), where the dataset and other useful information to build your own dataset may be found. 
 - The code showcased in this github page is the one that was used to generate a model with <b>99.97% optical character recognition (OCR) accuracy</b> with the Perkins Brailler (I'm not affiliated with them, no worries).
   
     <br> 
@@ -131,19 +131,12 @@ python3 e-braille-tales.py "my_text_file_name.txt"
   - New section RTF commands "\sbkpage" ("⠸⠡⠎⠃⠅⠏⠁⠛⠑") are swapped out for a line break, followed by a page and section break 
     (\</row>\</page>\</section>\<section>\<page>\<row> PEF tags).
 
-  These are the only RTF commands that are automatically removed from the braille text and converted into PEF tags. All other RTF commands (if present)     will be carried over in braille form into the PEF file and could be removed manually afterwards. However, as braille already encompasses formatting       indicators for symbols, words and passages written in caps, italics, bold, underline or script (font size of 28), as well as symbols in superscript or   subscript, there should be limited need to resort to other RTF commands than those listed above. 
+  These are the only RTF commands that are automatically removed from the braille text and converted into PEF tags. All other RTF commands (if present)     will be carried over in braille form into the PEF file and could be removed manually afterwards. However, as braille already encompasses typeform       indicators for symbols, words and passages written in caps, italics, bold, underline or script (font size of 28), as well as symbols in superscript or   subscript, there should be limited need to resort to other RTF commands than those listed above. 
 
 - When using grade I ("⠰") or numeric ("⠼") indicators, these should be placed directly in front of the characters they will be affecting. The next       order of priority is the capitalization indicators ("⠠"), followed by the other typeform indicators (bold, italics, underline, script) and finally by     superscript "⠰⠔" or subscript "⠰⠢" indicators. 
  
-
-
- 
-
-
-
-        
-  <br><b>And that's it!</b> You're now ready to convert your typewritten manuscript into digital format! You can now type away at the cottage or in the park without worrying about your laptop's battery life 
-  and still get your document polished up in digital form in the end! 🎉📖
+     
+<br><b>And that's it!</b> You're now ready to convert your braille manuscript into digital format! If you are close to someone who is visually impaired and would like to help them find meaningful work through technology, or maybe if you are only sprucing up your braille skills in preparation for the Zombie Apocalypse (lol) then this app is for you! 🎉📖
   
   
 ## ✍️ Authors <a name = "author"></a>
