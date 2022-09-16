@@ -17,7 +17,7 @@ This braille OCR application can convert JPEG braille text images into RTF docum
 <p align="left"> A neat functionality of <b>e-Braille Tales</b> is that the typos (sequence of at least two successive full braille cells)
   automatically get filtered out, and do not appear in the final RTF text nor in the PEF file. The PEF file can in turn be used to print out copies of your work on a braille embosser, or to read them electronically using a refreshable braille display.
   
-  - My <b>deep learning model</b> for the Perkins Brailler is available on my Google Drive (https://drive.google.com/drive/folders/1RNGUoBJOSamYOaO7ElFBeWIRVpHtlQpd?usp=sharing), where the dataset and other useful information to build your own dataset may be found. 
+  - My <b>deep learning model</b> for the Perkins Brailler is available on my Google Drive (https://drive.google.com/file/d/1D60OAcqJc0B_AGg_oORUYVbQGfDjYNRw/view?usp=sharing), whereas the dataset and other useful information to build your own dataset may be found at the following link: https://drive.google.com/drive/folders/1_NaaDiPlptnQNaIZ7WNHgyaJz75ne7pl?usp=sharing. 
 - The code showcased in this github page is the one that was used to generate a model with <b>99.97% optical character recognition (OCR) accuracy</b> with the Perkins Brailler (I'm not affiliated with them, no worries).
   
     <br> 
