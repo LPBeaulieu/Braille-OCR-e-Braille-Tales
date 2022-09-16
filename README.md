@@ -134,8 +134,10 @@ python3 e-braille-tales.py "my_text_file_name.txt"
   - New section RTF commands "\sbkpage" ("⠸⠡⠎⠃⠅⠏⠁⠛⠑") are swapped out for a line break, followed by a page and section break 
     (\</row>\</page>\</section>\<section>\<page>\<row> PEF tags).
 
-  These are the only RTF commands that are automatically removed from the braille text and converted into PEF tags. All other RTF commands (if present)     will be carried over in braille form into the PEF file and could be removed manually afterwards. However, as braille already encompasses typeform       indicators for symbols, words and passages written in caps, italics, bold, underline or script (font size of 28), as well as symbols in superscript or   subscript, there should be limited need to resort to other RTF commands than those listed above. 
+  For an in-depth explanation of all the most common RTF commands and escapes, please consult: https://www.oreilly.com/library/view/rtf-pocket-guide/9781449302047/ch01.html.
 
+  These are the only RTF commands that are automatically removed from the braille text and converted into PEF tags. All other RTF commands (if present)     will be carried over in braille form into the PEF file and could be removed manually afterwards. However, as braille already encompasses typeform         indicators for symbols, words and passages written in caps, italics, bold, underline or script (font size of 28), as well as symbols in superscript or   subscript, there should be limited need to resort to other RTF commands than those listed above. 
+  
 - When using grade I ("⠰") or numeric ("⠼") indicators, these should be placed directly in front of the characters they will be affecting. The next       order of priority is the capitalization indicators ("⠠"), followed by the other typeform indicators (bold, italics, underline, script) and finally by     superscript "⠰⠔" or subscript "⠰⠢" indicators. 
  
      
