@@ -17,8 +17,7 @@ This braille OCR application can convert JPEG braille text images into RTF docum
 <p align="left"> A neat functionality of <b>e-Braille Tales</b> is that the typos (sequence of at least two successive full braille cells)
   automatically get filtered out, and do not appear in the final RTF text nor in the PEF file. The PEF file can in turn be used to print out copies of your work on a braille embosser, or to read them electronically using a refreshable braille display.
   
-  - My <b>deep learning model</b> for the Perkins Brailler is available on my Google Drive (https://drive.google.com/file/d/1D60OAcqJc0B_AGg_oORUYVbQGfDjYNRw/view?usp=sharing), 
-whereas the dataset and other useful information to build your own dataset may be found at the following link: https://drive.google.com/drive/folders/1_NaaDiPlptnQNaIZ7WNHgyaJz75ne7pl?usp=sharing. 
+  - My <b>deep learning model</b> for the Perkins Brailler along with the dataset and other useful information may be found on my Google Drive at the following link: https://drive.google.com/drive/folders/1RNGUoBJOSamYOaO7ElFBeWIRVpHtlQpd?usp=sharing. 
 - The code showcased in this github page is the one that was used to generate a model with <b>99.97% optical character recognition (OCR) accuracy</b> with the Perkins Brailler (I'm not affiliated with them, no worries).
   
     <br> 
@@ -97,9 +96,7 @@ pip install alive-progress
 ```
 mkdir "OCR Raw Data" "Training&Validation Data" 
 ```
-<b>Step 9</b>- Download the OCR model that I trained on the Perkins Brailler at the following link (https://drive.google.com/file/d/1D60OAcqJc0B_AGg_oORUYVbQGfDjYNRw/view?usp=sharing) and simply place the compressed folder in your working folder. Your working folder should now contain (among other files) the Python code file "e-braille-tales.py", the OCR Model compressed folder entitled "Model_Perkins_Brailler_acc9997", along with the subfolders "OCR Raw Data" and "Training&Validation Data" that you created in step 8.
-
-<b>Step 10</b>- You're now ready to use <b>e-Braille Tales</b>! 🎉
+<b>Step 9</b>- You're now ready to use <b>e-Braille Tales</b>! 🎉
 
 ## 🎈 Usage <a name="usage"></a>
 The "e-braille-tales.py" Python code converts JPEG braille text scans into printed English in the form of a Rich Text Format (RTF) document and digitized braille as a Portable Embosser Format (PEF) file. In addition to the RTF and PEF files, the code will generate a braille text file (".txt") containing the OCR results before transposition to printed English, so that you could revisit the text in braille form. Each page of this ".txt" file will line up with the pages written on the Perkins Brailler and will be separated from one another by two carriage returns, to ensure easy navigation throughout the document. You can find instructions on how to use <b>e-Braille Tales</b> on my YouTube channel: **The link will be placed here once the Youtube video is uploaded**.<br>
