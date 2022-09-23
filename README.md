@@ -5,7 +5,7 @@ This braille OCR application can convert JPEG braille text images into RTF docum
 <h3 align="center">e-Braille Tales</h3>
 <div align="center">
   
-  [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPLv3.0-brightgreen.svg)](https://github.com/LPBeaulieu/TintypeText/blob/main/LICENSE)
+  [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPLv3.0-brightgreen.svg)](https://github.com/LPBeaulieu/e-Braille-Tales/blob/main/LICENSE)
   [![GitHub last commit](https://img.shields.io/github/last-commit/LPBeaulieu/e-Braille-Tales)](https://github.com/LPBeaulieu/e-Braille-Tales)
   [![GitHub issues](https://img.shields.io/github/issues/LPBeaulieu/e-Braille-Tales)](https://github.com/LPBeaulieu/e-Braille-Tales)
   
